@@ -1,0 +1,19 @@
+import numpy as np #on importe numpy (bibliothèque python) afin d'utiliser des fonctions mathématiques 
+from scipy.stats import norm #on importe la loi normale 
+
+#On initialise le programme avec les paramètres du modèle Black-Scholes
+stock_price = 160.0  
+strike_price = 160.0
+time_to_maturity = 2.0 
+risk_free_rate = 0.03  
+volatility = 0.2  
+
+# On calcule les valeurs d1 et d2 selon la formule de Black-Scholes 
+d1 = (np.log(stock_price / strike_price) + (risk_free_rate + 0.5 * volatility**2) * time_to_maturity) / (volatility * np.sqrt(time_to_maturity))
+d2 = d1 - volatility * np.sqrt(time_to_maturity)
+
+#On utilise la formule de Black-Scholes avec les paramètres précédents
+call_price = stock_price * norm.cdf(d1) - strike_price * np.exp(-risk_free_rate * time_to_maturity) * norm.cdf(d2)
+
+#On renvoie le résultat trouvé
+print("Le prix du call européen sur Apple est :", call_price)
