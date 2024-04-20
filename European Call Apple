@@ -1,19 +1,15 @@
 import numpy as np #We import numpy(Python Library) so as to use mathematical functions 
 from scipy.stats import norm #We import the Normal Distribution 
 
-#Initialization of Black-Scholes Model 
 stock_price = 160.0  
 strike_price = 160.0
 time_to_maturity = 2.0 
 risk_free_rate = 0.03  
 volatility = 0.2  
 
-#We calculate d1 & d2
 d1 = (np.log(stock_price / strike_price) + (risk_free_rate + 0.5 * volatility**2) * time_to_maturity) / (volatility * np.sqrt(time_to_maturity))
 d2 = d1 - volatility * np.sqrt(time_to_maturity)
 
-#We use Black Scholes formula for an European call
 call_price = stock_price * norm.cdf(d1) - strike_price * np.exp(-risk_free_rate * time_to_maturity) * norm.cdf(d2)
 
-#We display the price of the call
 print("The price of the European call on Apple is :", call_price)
