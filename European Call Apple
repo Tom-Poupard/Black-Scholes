@@ -1,5 +1,5 @@
-import numpy as np #We import numpy(Python Library) so as to use mathematical functions 
-from scipy.stats import norm #We import the Normal Distribution 
+import numpy as np 
+from scipy.stats import norm 
 
 stock_price = 160.0  
 strike_price = 160.0
