@@ -12,4 +12,4 @@ d2 = d1 - volatility * np.sqrt(time_to_maturity)
 
 call_price = stock_price * norm.cdf(d1) - strike_price * np.exp(-risk_free_rate * time_to_maturity) * norm.cdf(d2)
 
-print("The price of the European call on Apple is :", call_price)
+print("The price of the European call on Apple is : ", call_price)
