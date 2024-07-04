@@ -1,0 +1,97 @@
+# Black Scholes Option Pricing Formula for calls and puts
+
+import numpy as np 
+from scipy.stats import norm 
+import matplotlib.pyplot as plt
+
+def float_input(value):
+    while True:
+        parameter = input(value)
+        try:
+            return float(parameter)
+        except ValueError:
+            print("Wrong input. Try again !")
+
+spot = float_input("Spot ? : ")
+strike = float_input("Strike ? : ")
+interest_rate = float_input("Interest Rate ? (5.75% will be 5.75): ") /100
+maturity = float_input("Maturity ? (7.5 will be 7 years and 6 months): ")
+implied_volatility = float_input("Implied Volatility ? (20% will be 20) : ") /100
+
+# d1 and d2
+d1 = (np.log(spot / strike) + (interest_rate + 0.5 * implied_volatility**2) * maturity) / (implied_volatility * np.sqrt(maturity))
+d2 = d1 - implied_volatility * np.sqrt(maturity)
+
+
+print()
+
+## call or put ? + price
+option_type = input("Call or Put ? Enter 1 for a call and 2 for a put :")
+
+if option_type == "1":
+        call = spot*norm.cdf(d1) - strike*np.exp(-interest_rate*maturity)*norm.cdf(d2)
+        print (f" The price of the call is : {call:.2f} EUR")
+elif option_type == "2":
+        put = strike*np.exp(-interest_rate*maturity)*norm.cdf(-d2) - spot*norm.cdf(-d1)
+        print (f" The price of the put is : {put:.2f} EUR")
+else:
+        print("Enter 1 or 2")
+        
+# greeks 
+print()
+print("Greeks : ")
+print()
+
+if option_type == "1":
+    delta = norm.cdf(d1)
+    gamma = norm.pdf(d1) / (spot*implied_volatility*np.sqrt(maturity))
+    vega = spot*norm.pdf(d1)*np.sqrt(maturity)
+    rho = strike*maturity*np.exp(-interest_rate*maturity)*norm.cdf(d2)
+    theta = -(spot*norm.pdf(d1)*implied_volatility)/(2*np.sqrt(maturity)) - interest_rate*strike*np.exp(-interest_rate*maturity)*norm.cdf(d2)
+    print(f"Delta : {delta}")
+    print(f"Gamma : {delta}")
+    print(f"Vega : {vega}")
+    print(f"Rho : {rho}")
+    print(f"Theta : {theta}")
+else:
+    delta = norm.cdf(d1) - 1
+    gamma = gamma = norm.pdf(d1) / (spot*implied_volatility*np.sqrt(maturity))
+    vega = spot*norm.pdf(d1)*np.sqrt(maturity)
+    rho = -strike*maturity*np.exp(-interest_rate*maturity)*norm.cdf(-d2)
+    theta = -(spot*norm.pdf(d1)*implied_volatility)/(2*np.sqrt(maturity)) + interest_rate*strike*np.exp(-interest_rate*maturity)*norm.cdf(-d2)
+    print(f"Delta : {delta}")
+    print(f"Gamma : {delta}")
+    print(f"Vega : {vega}")
+    print(f"Rho : {rho}")
+    print(f"Theta : {theta}")
+
+##payoff
+spot_prices = np.linspace(0, 2 * spot, 100)
+
+if option_type == "1":
+    call_payoff = np.maximum(spot_prices - strike, 0) - call
+    plt.figure(figsize=(10, 6))
+    plt.plot(spot_prices, call_payoff, label='Payoff of Call Option')
+    plt.axhline(0, color='black', lw=1)
+    plt.axvline(strike, color='red', linestyle='--', label='Strike Price')
+    plt.title('Call Option Payoff')
+    plt.xlabel('Spot Price at Expiration')
+    plt.ylabel('Payoff')
+    plt.legend()
+    plt.grid(True)
+    plt.show()
+else:
+    put_payoff = np.maximum(strike - spot_prices, 0) - put
+    plt.figure(figsize=(10, 6))
+    plt.plot(spot_prices, put_payoff, label='Payoff of Put Option')
+    plt.axhline(0, color='black', lw=1)
+    plt.axvline(strike, color='red', linestyle='--', label='Strike Price')
+    plt.title('Put Option Payoff')
+    plt.xlabel('Spot Price at Expiration')
+    plt.ylabel('Payoff')
+    plt.legend()
+    plt.grid(True)
+    plt.show()
+
+print()
+print ("done")
