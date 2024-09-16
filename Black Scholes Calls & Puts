@@ -22,7 +22,6 @@ implied_volatility = float_input("Implied Volatility ? (20% will be 20) : ") /10
 d1 = (np.log(spot / strike) + (interest_rate + 0.5 * implied_volatility**2) * maturity) / (implied_volatility * np.sqrt(maturity))
 d2 = d1 - implied_volatility * np.sqrt(maturity)
 
-
 print()
 
 ## call or put ? + price
