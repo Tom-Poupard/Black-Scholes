@@ -1,10 +1,12 @@
-import numpy as np 
-from scipy.stats import norm 
+#BS
 
-stock_price = 160.0  
+import numpy as np
+from scipy.stats import norm
+
+stock_price = 160.0
 strike_price = 160.0
-time_to_maturity = 2.0 
-risk_free_rate = 0.03  
+time_to_maturity = 2.0
+risk_free_rate = 0.03
 volatility = 0.2
 
 d1 = (np.log(stock_price / strike_price) + (risk_free_rate + 0.5 * volatility**2) * time_to_maturity) / (volatility * np.sqrt(time_to_maturity))
