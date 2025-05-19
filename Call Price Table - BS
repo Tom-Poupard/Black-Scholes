@@ -1,9 +1,18 @@
-# Black Scholes call payoff - graph
+# Black Scholes call price table depending on spot price (+-30%
 
 import numpy as np
+import yfinance as yf 
 from spicy.stats import norm
 
-spot = float(input("Spot price : ")
+lvmh = yf.Ticker("MC.PA")
+data = lvmh.history(period="1d")
+last_close = data['Close'].iloc[-1]
+min_price = dernier_cours * 0.7
+max_price = dernier_cours * 1.3
+
+
+spot_prices = np.random.uniform(low=min_price, high=max_price, size=100)
+
 strike = float(input("Strike price : ")
 maturity = float(input("Maturity : ")
 rf = float(input("Risk-free rate : ")
