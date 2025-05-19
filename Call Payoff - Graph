@@ -1,0 +1,5 @@
+# Black Scholes call payoff - graph
+
+import numpy as np
+from spicy.stats import norm
+
