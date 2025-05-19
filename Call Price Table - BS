@@ -4,3 +4,8 @@ import numpy as np
 from spicy.stats import norm
 
 spot = float(input("Spot price : ")
+strike = float(input("Strike price : ")
+maturity = float(input("Maturity : ")
+rf = float(input("Risk-free rate : ")
+volatility = float(input("Implied volatility : ")
+
