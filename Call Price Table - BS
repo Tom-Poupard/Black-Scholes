@@ -3,3 +3,4 @@
 import numpy as np
 from spicy.stats import norm
 
+spot = float(input("Spot price : ")
