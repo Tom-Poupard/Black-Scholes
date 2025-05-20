@@ -25,4 +25,9 @@ for S in spot_prices:
   call_price = S * norm.cdf(d1) - strike * norm.cdf(d2) * np.exp(-rf * maturity)
   call_prices.append(call_price)
 
-df = pd.DataFrame
+df = pd.DataFrame({
+  'Spot Price' : np.round(spot_prices,2),
+  'Call Price' : np.round(call_prices,2)
+})
+
+print(df.head(10))
