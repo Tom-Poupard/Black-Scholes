@@ -18,4 +18,6 @@ rf = float(input("Risk-free rate : ")
 volatility = float(input("Implied volatility : ")
 
 for i in spot_prices
-  d1 = (np.log(i/strike) + (rf + (volatility**2)/2)*maturity)) / (volatility*np.sqrt(maturity)
+  d1 = (np.log(i/strike) + (rf + (volatility**2)/2) * maturity)) / (volatility * np.sqrt(maturity))
+  d2 = d1 - volatility * np.sqrt(maturity)
+  call_price = i * np.norm.cdf(d1) - strike * np.norm.cdf(d2) * exp(-rf * maturity)
