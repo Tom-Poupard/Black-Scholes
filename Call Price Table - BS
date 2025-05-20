@@ -1,6 +1,7 @@
 # Black Scholes call price table depending on spot price (+-30%)
 
 import numpy as np
+import pandas as pd
 import yfinance as yf 
 from scipy.stats import norm
 
@@ -24,4 +25,4 @@ for S in spot_prices:
   call_price = S * norm.cdf(d1) - strike * norm.cdf(d2) * np.exp(-rf * maturity)
   call_prices.append(call_price)
 
-df
+df = pd.DataFrame
