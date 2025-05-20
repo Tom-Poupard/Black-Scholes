@@ -16,11 +16,11 @@ spot_prices = np.random.uniform(low=min_price, high=max_price, size=100)
 strike = last_close
 maturity = float(input("Maturity : "))
 rf = float(input("Risk-free rate : "))
-volatility = float(input("Implied volatility : ")
+volatility = float(input("Implied volatility : "))
 
 call_prices = []
 for S in spot_prices:
-  d1 = (np.log(S/strike) + (rf + (volatility**2)/2) * maturity)) / (volatility * np.sqrt(maturity))
+  d1 = (np.log(S/strike) + (rf + (volatility**2)/2) * maturity) / (volatility * np.sqrt(maturity))
   d2 = d1 - volatility * np.sqrt(maturity)
   call_price = S * norm.cdf(d1) - strike * norm.cdf(d2) * np.exp(-rf * maturity)
   call_prices.append(call_price)
