@@ -17,4 +17,5 @@ maturity = float(input("Maturity : ")
 rf = float(input("Risk-free rate : ")
 volatility = float(input("Implied volatility : ")
 
-call_price = 
+for i in spot_prices
+  d1 = (np.log(i/strike) + (rf + (volatility**2)/2)*maturity)) / (volatility*np.sqrt(maturity)
