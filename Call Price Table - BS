@@ -2,7 +2,8 @@
 
 import numpy as np
 import pandas as pd
-import yfinance as yf 
+import yfinance as yf
+import matplotlib.pyplot as plt
 from scipy.stats import norm
 
 lvmh = yf.Ticker("MC.PA")
@@ -34,3 +35,11 @@ df = df.sort_values(by="Spot Price").reset_index(drop=True)
 df.index = [f"Prix call {i+1}" for i in range(len(df))]
 
 print(df.head(10))
+
+plt.plot(df['Spot Price'], df['Call Price (BS)'])
+plt.xlabel("Spot Price")
+plt.ylabel("Call Price (Black-Scholes)")
+plt.title("Call price depending on Spot (+-30%)")
+plt.grid(True)
+plt.show()
+
