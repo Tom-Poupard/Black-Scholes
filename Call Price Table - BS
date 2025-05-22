@@ -31,7 +31,7 @@ df = pd.DataFrame({
   'Call Price' : np.round(call_prices,2)
 })
 
-df = df.sort_values(by="Spot Price").reset_index(drop=True)
+df = df.sort_values(by="Spot Price", ascending = True).reset_index(drop=True)
 df.index = [f"Prix call {i+1}" for i in range(len(df))]
 
 print(df.head(10))
