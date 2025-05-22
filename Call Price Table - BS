@@ -36,7 +36,7 @@ df.index = [f"Prix call {i+1}" for i in range(len(df))]
 
 print(df.head(10))
 
-plt.plot(df['Spot Price'], df['Call Price (BS)'], color = 'red')
+plt.plot(df['Spot Price'], df['Call Price'], color = 'red')
 plt.xlabel("Spot Price")
 plt.ylabel("Call Price")
 plt.title("Call price depending on Spot (+-30%)")
