@@ -34,7 +34,6 @@ df = df.sort_values(by="Spot Price", ascending = True).reset_index(drop=True)
 df.index = [f"Prix call {i+1}" for i in range(len(df))]
 
 print(df.head(10))
-
 plt.plot(df['Spot Price'], df['Call Price'], color = 'red')
 plt.xlabel("Spot Price")
 plt.ylabel("Call Price")
