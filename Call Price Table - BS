@@ -39,6 +39,6 @@ plt.plot(df['Spot Price'], df['Call Price'], color = 'red')
 plt.xlabel("Spot Price")
 plt.ylabel("Call Price")
 plt.title("Call price depending on Spot (+-30%)")
-plt.grid(True)
+plt.grid(False)
 plt.show()
 
