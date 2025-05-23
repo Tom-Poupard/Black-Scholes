@@ -13,7 +13,6 @@ min_price = last_close * 0.5
 max_price = last_close * 1.5
 
 spot_prices = np.random.uniform(low=min_price, high=max_price, size=100)
-
 strike = last_close
 maturity = float(input("Maturity : "))
 rf = float(input("Risk-free rate : "))
