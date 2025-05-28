@@ -6,7 +6,9 @@ import yfinance as yf
 import matplotlib.pyplot as plt
 from scipy.stats import norm
 
-lvmh = yf.Ticker("MC.PA")
+ticker = str(input("Ticker of the underlting : ")
+
+lvmh = yf.Ticker(ticker)
 data = lvmh.history(period="1d")
 last_close = data['Close'].iloc[-1]
 min_price = last_close * 0.5
@@ -37,7 +39,7 @@ print(df.head(10))
 plt.plot(df['Spot Price'], df['Call Price'], color = 'red')
 plt.xlabel("Spot Price")
 plt.ylabel("Call Price")
-plt.title("Call price depending on Spot (+-30%)")
+plt.title("Call price depending on {ticker}'s Spot (+-30%)")
 plt.grid(False)
 plt.show()
 
