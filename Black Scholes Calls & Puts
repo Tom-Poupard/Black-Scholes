@@ -24,7 +24,6 @@ d2 = d1 - implied_volatility * np.sqrt(maturity)
 
 print()
 
-## call or put ? + price
 option_type = input("Call or Put ? Enter 1 for a call and 2 for a put :")
 
 if option_type == "1":
