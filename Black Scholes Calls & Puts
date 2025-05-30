@@ -35,7 +35,6 @@ elif option_type == "2":
 else:
         print("Enter 1 or 2")
         
-# greeks 
 print()
 print("Greeks : ")
 print()
