@@ -1,7 +1,36 @@
-#Monte Carlo Simulation
-
 import numpy as np
 import pandas as pd
 import yfinance as yf
 
-ticker = str(input("Enter the ticker of the underlying : "))
+# Parameters
+ticker = yf.Ticker("MC.PA")
+spot_price = ticker.history(period="1d")["Close"].iloc[-1]
+
+strike = spot_price
+rate = 0.01
+vol = 0.3
+years = 5
+days = 252 * years
+N = 1000  # Number of simulations
+
+def monte_carlo_simulations_df(spot, strike, rate, vol, days, N):
+    dt = 1 / 252
+    prices = np.zeros((N, days + 1))
+    prices[:, 0] = spot
+
+    for t in range(1, days + 1):
+        Z = np.random.normal(0, 1, N)
+        prices[:, t] = prices[:, t - 1] * np.exp((rate - 0.5 * vol**2) * dt + vol * np.sqrt(dt) * Z)
+
+    # Create date index starting from today
+    dates = pd.bdate_range(start=pd.Timestamp.today().normalize(), periods=days + 1)
+    
+    # Convert to DataFrame and transpose
+    df = pd.DataFrame(prices.T, index=dates, columns=[f"Sim_{i+1}" for i in range(N)])
+    return df
+
+# Run simulation and get DataFrame
+sim_df = monte_carlo_simulations_df(spot_price, strike, rate, vol, days, N)
+
+# Optionally display head
+print(sim_df.head())
