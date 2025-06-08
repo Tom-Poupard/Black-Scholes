@@ -29,8 +29,6 @@ def monte_carlo_simulations_df(spot, strike, rate, vol, days, N):
     df = pd.DataFrame(prices.T, index=dates, columns=[f"Sim_{i+1}" for i in range(N)])
     return df
 
-# Run simulation and get DataFrame
 sim_df = monte_carlo_simulations_df(spot_price, strike, rate, vol, days, N)
 
-# Optionally display head
 print(sim_df.head())
