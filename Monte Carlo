@@ -31,4 +31,4 @@ def monte_carlo_simulations_df(spot, strike, rate, vol, days, N):
 
 sim_df = monte_carlo_simulations_df(spot_price, strike, rate, vol, days, N)
 
-print(sim_df.head())
+print(sim_df.head(10))
