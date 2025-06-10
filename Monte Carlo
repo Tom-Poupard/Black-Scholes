@@ -1,8 +1,8 @@
 import numpy as np
 import pandas as pd
 import yfinance as yf
+import matplotlib.pyplot as plt
 
-# Parameters
 ticker = yf.Ticker("MC.PA")
 spot_price = ticker.history(period="1d")["Close"].iloc[-1]
 
@@ -10,25 +10,32 @@ strike = spot_price
 rate = 0.01
 vol = 0.3
 years = 5
-days = 252 * years
+days = 252
+total_days = days * years
+dt = 1 / 252
 N = 1000  # Number of simulations
 
-def monte_carlo_simulations_df(spot, strike, rate, vol, days, N):
-    dt = 1 / 252
-    prices = np.zeros((N, days + 1))
-    prices[:, 0] = spot
+def monte_carlo_simulations_df(spot, strike, rate, vol, days, years, N):
+    prices = np.zeros((total_days + 1, N))
+    prices[0, :] = spot 
 
-    for t in range(1, days + 1):
+    for t in range(1, total_days + 1):
         Z = np.random.normal(0, 1, N)
-        prices[:, t] = prices[:, t - 1] * np.exp((rate - 0.5 * vol**2) * dt + vol * np.sqrt(dt) * Z)
+        prices[t, :] = prices[t - 1, :] * np.exp((rate - 0.5 * vol**2) * dt + vol * np.sqrt(dt) * Z) 
 
-    # Create date index starting from today
-    dates = pd.bdate_range(start=pd.Timestamp.today().normalize(), periods=days + 1)
-    
-    # Convert to DataFrame and transpose
-    df = pd.DataFrame(prices.T, index=dates, columns=[f"Sim_{i+1}" for i in range(N)])
+    dates = pd.bdate_range(start=pd.Timestamp.today().normalize(), periods=total_days + 1) 
+    df = pd.DataFrame(prices, index=dates, columns=[f"Sim {i+1}" for i in range(N)]) 
     return df
 
-sim_df = monte_carlo_simulations_df(spot_price, strike, rate, vol, days, N)
+montecarlo = monte_carlo_simulations_df(spot_price, strike, rate, vol, days, years, N)
 
-print(sim_df.head(10))
+print(montecarlo.head(15))  
+
+plt.figure(figsize=(12, 6))
+montecarlo.plot(ax=plt.gca(), legend=False, linewidth=0.5)  # affiche les 1000 courbes, plus fines
+plt.title("Simulations de Monte Carlo des prix de l'actif")
+plt.xlabel("Date")
+plt.ylabel("Prix simulé")
+plt.grid(True)
+plt.tight_layout()
+plt.show()
