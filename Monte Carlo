@@ -30,7 +30,6 @@ def monte_carlo_simulations_df(spot, strike, rate, vol, days, years, N):
 montecarlo = monte_carlo_simulations_df(spot_price, strike, rate, vol, days, years, N)
 
 print(montecarlo.head(15))  
-
 plt.figure(figsize=(12, 6))
 montecarlo.plot(ax=plt.gca(), legend=False, linewidth=0.5)  # affiche les 1000 courbes, plus fines
 plt.title("Simulations de Monte Carlo des prix de l'actif")
