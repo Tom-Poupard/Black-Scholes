@@ -1,12 +1,15 @@
 #import libararies
+
 import numpy as np
 import pandas as pd
 import yfinance as yf
 import matplotlib.pyplot as plt
 
+#Choose the ticker of the underlying
 ticker = yf.Ticker("MC.PA")
 spot_price = ticker.history(period="1d")["Close"].iloc[-1]
 
+#Parameters of the option
 strike = spot_price
 rate = 0.01
 vol = 0.3
@@ -32,7 +35,7 @@ montecarlo = monte_carlo_simulations_df(spot_price, strike, rate, vol, days, yea
 
 print(montecarlo.head(15))  
 plt.figure(figsize=(12, 6))
-montecarlo.plot(ax=plt.gca(), legend=False, linewidth=0.5)  # affiche les 1000 courbes, plus fines
+montecarlo.plot(ax=plt.gca(), legend=False, linewidth=0.5) 
 plt.title("Simulations de Monte Carlo des prix de l'actif")
 plt.xlabel("Date")
 plt.ylabel("Prix simulé")
