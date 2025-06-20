@@ -10,7 +10,7 @@ spot_price = ticker.history(period="1d")["Close"].iloc[-1]
 
 #Parameters of the option
 strike = spot_price
-rate = 0.01
+rate = 0.025
 vol = 0.3
 years = 5
 days = 252
