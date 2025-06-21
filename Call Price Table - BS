@@ -7,7 +7,6 @@ import matplotlib.pyplot as plt
 from scipy.stats import norm
 
 ticker = str(input("Ticker of the underlting : ")
-
 lvmh = yf.Ticker(ticker)
 data = lvmh.history(period="1d")
 last_close = data['Close'].iloc[-1]
