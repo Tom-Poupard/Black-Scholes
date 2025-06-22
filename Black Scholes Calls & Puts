@@ -61,7 +61,6 @@ else:
     print(f"Rho : {rho}")
     print(f"Theta : {theta}")
 
-##payoff
 spot_prices = np.linspace(0, 2 * spot, 100)
 
 if option_type == "1":
