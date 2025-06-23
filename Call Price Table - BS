@@ -41,3 +41,4 @@ plt.title("Call price depending on {ticker}'s Spot (+-30%)")
 plt.grid(False)
 plt.show()
 
+
