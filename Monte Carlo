@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 
 #Choose the ticker of the underlying
 ticker = yf.Ticker("MC.PA")
-spot_price = ticker.history(period="1d")["Close"].iloc[-1]
+spot_price = ticker.history(period="1d")["Close"].iloc[-1] #last closing price
 
 #Parameters of the option
 strike = spot_price
