@@ -5,4 +5,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import yfinance as yf
 
-
+ticker = yf.Ticker("MC.PA")
+historique = ticker.history(period="1d")
+S0 = historique['Close'].iloc[-1]
+print(f"Dernier cours de clôture de LVMH (S0) : {S0:.2f} €")
