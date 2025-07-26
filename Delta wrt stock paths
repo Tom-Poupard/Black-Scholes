@@ -23,3 +23,5 @@ def simuler_cours_lvmh_multi(N, nb_paths=5, S0=800, mu=0.08, sigma=0.25):
             chemins[i, t] = chemins[i, t-1] * np.exp((mu - 0.5 * sigma**2) * dt + sigma * np.sqrt(dt) * bruit)
 
     return chemins
+
+
