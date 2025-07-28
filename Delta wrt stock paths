@@ -24,4 +24,20 @@ def simuler_cours_lvmh_multi(N, nb_paths=5, S0=800, mu=0.08, sigma=0.25):
 
     return chemins
 
+def calculer_delta_paths(paths, K, r, sigma, T):
+    nb_paths, nb_jours = paths.shape
+    deltas = np.zeros_like(paths)
+    dt = T / nb_jours
+
+    for i in range(nb_paths):
+        for t in range(nb_jours):
+            S = paths[i, t]
+            time_remaining = T - t * dt
+            if time_remaining <= 0:
+                deltas[i, t] = 1.0 if S > K else 0.0
+                continue
+            d1 = (np.log(S / K) + (r + 0.5 * sigma**2) * time_remaining) / (sigma * np.sqrt(time_remaining))
+            deltas[i, t] = norm.cdf(d1)
+
+    return deltas
 
