@@ -11,7 +11,7 @@ S0 = historic['Close'].iloc[-1]
 print(f"Dernier cours de clôture de LVMH (S0) : {S0:.2f} €")
 
 
-def simuler_cours_lvmh_multi(N, nb_paths=5, S0=800, mu=0.08, sigma=0.25):
+def simuler_cours_lvmh(N, nb_paths=5, S0=800, mu=0.08, sigma=0.25):
     nb_jours = 252 * N
     dt = 1 / 252
     chemins = np.zeros((nb_paths, nb_jours))
@@ -41,3 +41,10 @@ def calculer_delta_paths(paths, K, r, sigma, T):
 
     return deltas
 
+N = 5
+nb_paths = 5
+mu = 0.08
+sigma = 0.25
+r = 0.02
+T = N
+K = S0 * 1 #ITM
