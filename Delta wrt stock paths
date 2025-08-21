@@ -10,7 +10,6 @@ historic = ticker.history(period="1d")
 S0 = historic['Close'].iloc[-1]
 print(f"Dernier cours de clôture de LVMH (S0) : {S0:.2f} €")
 
-
 def simuler_cours_lvmh(N, nb_paths=5, S0=800, mu=0.08, sigma=0.25):
     nb_jours = 252 * N
     dt = 1 / 252
